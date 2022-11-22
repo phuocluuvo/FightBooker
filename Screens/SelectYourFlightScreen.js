@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -54,56 +54,35 @@ export default function SelectYourFlightScreen() {
         backgroundColor: '#EFF2FD',
         flex: 1,
       }}>
-      <StatusBar/>
+      <StatusBar />
       <LinearGradient
-        colors={['#FCFCFE','#8B93DB','#8B93DB']}
+        colors={['#FCFCFE', '#8B93DB']}
         style={{
           position: 'absolute',
           bottom: windowHeight / 4 * 3,
-          width:windowWidth,
-          height:windowHeight - windowHeight / 4 * 3+40,
+          width: windowWidth,
+          height: windowHeight - windowHeight / 4 * 3 + 40,
         }}>
       </LinearGradient>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 20,
-          height: 40,
-        }}>
-        <TouchableOpacity
-          onPress={() => nav.goBack()}>
-          <Ionicons name='chevron-back' size={20} color={'#000'} />
-        </TouchableOpacity>
-        <Text
-          style={{
-            textAlign: 'center',
-            fontSize: 20,
-            fontWeight: '700',
-            flex: 1,
-          }}>Select Your Flight</Text>
-      </View>
-      
-      <Image
+      <ImageBackground
         source={require('../assets/richard.png')}
         style={{
           width: windowWidth,
-          height:windowHeight*3/4,
-          bottom:0,
+          height: windowHeight * 3 / 4,
+          bottom: 0,
           position: 'absolute',
-        }} 
+        }}
         blurRadius={15}
-        />
-        <Image
+      />
+      <Image
         source={require('../assets/nasa.png')}
         style={{
-          width: windowWidth + 5,
-          height: 440,
-          left: -5,
-          top: 80,
+          bottom: windowHeight / 4 * 3,
+          width: windowWidth,
+          height: windowHeight - windowHeight / 4 * 3 + 40,
           position: 'absolute',
         }} />
-      
+
       <View
         style={{
           width: windowWidth,
@@ -112,29 +91,30 @@ export default function SelectYourFlightScreen() {
           position: 'absolute',
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
         }}>
-          <View
+       
+        <View
           style={{
             position: 'absolute',
             width: windowWidth - 100,
-            height:70,
-            top: 105,
+            height: 70,
+            top: 100,
             left: 40,
-            borderTopLeftRadius:100,
-            borderTopRightRadius:100,
+            borderTopLeftRadius: 100,
+            borderTopRightRadius: 100,
             borderWidth: 2,
-            borderBottomWidth:0,
+            borderBottomWidth: 0,
             borderStyle: 'dashed',
             borderColor: 'rgba(0, 0, 0, 0.3)',
           }}>
         </View>
-        <Ionicons 
+        <Ionicons
           name='airplane'
           size={30}
           style={{
-            position:'absolute',
-            top: 90,
-            right:windowWidth/2,
-          }}/>
+            position: 'absolute',
+            top: 85,
+            right: windowWidth / 2,
+          }} />
         <View
           style={{
             backgroundColor: '#C3C3EE',
@@ -144,7 +124,7 @@ export default function SelectYourFlightScreen() {
             justifyContent: 'center',
             borderRadius: 100,
             position: 'absolute',
-            top: 130,
+            top: 135,
             left: 20,
           }}>
           <Text
@@ -162,7 +142,7 @@ export default function SelectYourFlightScreen() {
             justifyContent: 'center',
             borderRadius: 100,
             position: 'absolute',
-            top: 130,
+            top: 135,
             right: 30,
           }}>
           <Text
@@ -171,9 +151,28 @@ export default function SelectYourFlightScreen() {
             }}>
             NRT</Text>
         </View>
-        
+
 
       </View>
+      <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingHorizontal: 20,
+            height: 40,
+          }}>
+          <TouchableOpacity
+            onPress={() => nav.goBack()}>
+            <Ionicons name='chevron-back' size={25} color={'#000'} />
+          </TouchableOpacity>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: '700',
+              flex: 1,
+            }}>Select Your Flight</Text>
+        </View>
 
       <View
         style={{
@@ -182,7 +181,6 @@ export default function SelectYourFlightScreen() {
           height: windowHeight / 4 * 3,
           left: 0,
           bottom: 0,
-          // top: windowHeight - windowHeight / 4 * 3 + 40,
           borderTopWidth: 1,
           borderTopColor: 'rgba(255, 255, 255, 0.4)',
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
