@@ -12,6 +12,7 @@ import {
 } from "native-base";
 import MaskedView from "@react-native-community/masked-view";
 import { Easing } from "react-native-reanimated";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Boarding = () => (
   <ImageBackground
@@ -101,7 +102,8 @@ export default function BoardingPass() {
       toValue: 550,
       duration: 2000,
       useNativeDriver: false,
-      easing: Easing.bezierFn(0.7, 0.5, 1, 0.1),
+      // easing: Easing.bezierFn(0.7, 0.5, 1, 0.1),
+      easing: Easing.out(Easing.back(0.7)),
     }).start();
   }, []);
   return (
@@ -237,6 +239,18 @@ export default function BoardingPass() {
             source={require("../assets/khr.png")}
             className="absolute"
           ></Image>
+          <TouchableOpacity>
+            <ImageBackground
+              className="w-32 h-16 flex-row "
+              source={require("../assets/nut.png")}
+            >
+              <Image
+                className="ml-5"
+                source={require("../assets/iconnut.png")}
+              ></Image>
+              <Text className="mt-4 ml-1">Print</Text>
+            </ImageBackground>
+          </TouchableOpacity>
         </Box>
       </Center>
     </Box>

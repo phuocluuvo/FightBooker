@@ -13,8 +13,8 @@ const config = {
 export default function App() {
   return (
     <NativeBaseProvider config={config}>
-      <Notifycation></Notifycation>
-      {/* <BoardingPass></BoardingPass> */}
+      {/* <Notifycation></Notifycation> */}
+      <BoardingPass></BoardingPass>
     </NativeBaseProvider>
   );
 }
