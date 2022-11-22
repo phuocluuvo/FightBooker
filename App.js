@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from "expo-status-bar";
+import { NativeBaseProvider } from "native-base";
+import { StyleSheet, Text, View } from "react-native";
+import BoardingPass from "./screens/BoardingPass";
+import Notifycation from "./screens/Notifycation";
 
+const config = {
+  dependencies: {
+    "linear-gradient": LinearGradient,
+  },
+};
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider config={config}>
+      <Notifycation></Notifycation>
+      {/* <BoardingPass></BoardingPass> */}
+    </NativeBaseProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
