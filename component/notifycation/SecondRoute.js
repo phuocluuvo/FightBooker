@@ -5,7 +5,6 @@ import { FlatList, Box, Center, Avatar } from "native-base";
 const Item = ({ item }) => (
   <Box
     key={item._id}
-    shadow="2"
     w="full"
     rounded="lg"
     flexDirection="row"

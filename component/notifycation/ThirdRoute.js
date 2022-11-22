@@ -5,7 +5,6 @@ import { FlatList, Box, Center, Avatar } from "native-base";
 const Item = ({ item }) => (
   <Box
     key={item._id}
-    shadow="2"
     w="full"
     rounded="lg"
     flexDirection="row"
@@ -22,7 +21,9 @@ const Item = ({ item }) => (
         source={{
           uri: "https://vuongquocanh.com/wp-content/uploads/2018/05/london-eye-800x534.jpg",
         }}
-      ></Avatar>
+      >
+        SQ
+      </Avatar>
       <Box _text={{ color: "dark:alpha.60" }}>
         <Text style={{ fontSize: 20 }}>Sufer Quiwe</Text>
         Jhon Wdsaw

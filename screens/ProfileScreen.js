@@ -21,6 +21,7 @@ import {
   FontAwesome5,
   Fontisto,
   Ionicons,
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { useNavigation } from "@react-navigation/native";
@@ -40,7 +41,7 @@ const ProfileScreen = () => {
           colors: ["#FCFCFE", "#8B93DB"],
         },
       }}
-      safeAreaTop
+      safeArea
     >
       <ImageBackground
         source={{
@@ -48,7 +49,7 @@ const ProfileScreen = () => {
         }}
         style={{
           width: "100%",
-          height: "100%",
+          height: "110%",
           position: "absolute",
           opacity: 0.9,
           zIndex: 0,
@@ -64,35 +65,31 @@ const ProfileScreen = () => {
           justifyContent={"space-evenly"}
           alignItems={"center"}
         >
-          <BlurView style={{ borderRadius: 9999 }}>
-            <IconButton
-              borderRadius={"full"}
-              onPress={() => nav.navigate("ProfileScreen")}
-              icon={<ChevronLeftIcon size="lg" color="white" />}
-            ></IconButton>
-          </BlurView>
-          <Button variant={"link"}>
-            <Text
-              style={{
-                fontFamily: "Inter_900Black",
-                fontSize: 25,
-                lineHeight: 25,
-                textAlign: "center",
-              }}
-              color="white"
-            >
-              Profile
-            </Text>
-          </Button>
-          <BlurView style={{ borderRadius: 9999 }}>
-            <IconButton
-              variant={"link"}
-              rounded="full"
-              p="2"
-              onPress={() => nav.navigate("EditProfileScreen")}
-              icon={<FontAwesome5 name="edit" size={24} color="white" />}
-            ></IconButton>
-          </BlurView>
+          <IconButton
+            borderRadius={"full"}
+            onPress={() => nav.goBack()}
+            icon={<ChevronLeftIcon size="lg" color="white" />}
+          ></IconButton>
+
+          <Text
+            style={{
+              fontFamily: "Inter_900Black",
+              fontSize: 25,
+              lineHeight: 25,
+              textAlign: "center",
+            }}
+            color="white"
+          >
+            Profile
+          </Text>
+
+          <IconButton
+            variant={"link"}
+            rounded="full"
+            p="2"
+            onPress={() => nav.navigate("EditProfileScreen")}
+            icon={<FontAwesome5 name="edit" size={24} color="white" />}
+          ></IconButton>
         </HStack>
 
         <VStack alignItems={"center"} my="7">
@@ -225,7 +222,26 @@ const ProfileScreen = () => {
                   color="white"
                   fontWeight={"bold"}
                 >
-                  Bookmarked
+                  Settings
+                </Text>
+                <ChevronRightIcon size="sm" color="white" />
+              </HStack>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => nav.navigate("SignInScreen")}>
+              <HStack p="5" pb="3">
+                <MaterialCommunityIcons
+                  name="logout-variant"
+                  size={24}
+                  color="white"
+                />
+                <Text
+                  flex="1"
+                  px="2"
+                  fontSize="xl"
+                  color="white"
+                  fontWeight={"bold"}
+                >
+                  Log out
                 </Text>
                 <ChevronRightIcon size="sm" color="white" />
               </HStack>

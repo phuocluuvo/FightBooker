@@ -59,8 +59,8 @@ export default function Tabview() {
           });
           const color =
             index === i
-              ? useColorModeValue("blue", "#e5e5e5")
-              : useColorModeValue("#1f2937", "#a1a1aa");
+              ? useColorModeValue("#2596be", "#e5e5e5")
+              : useColorModeValue("#fff", "#a1a1aa");
           const borderColor =
             index === i
               ? "blue.500"
@@ -83,6 +83,7 @@ export default function Tabview() {
               >
                 <Animated.Text
                   style={{
+                    fontSize: 18,
                     color,
                   }}
                 >

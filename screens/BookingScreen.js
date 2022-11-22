@@ -50,18 +50,19 @@ const BookingScreen = () => {
           colors: ["#FCFCFE", "#8B93DB"],
         },
       }}
-      safeAreaTop
+      safeArea
     >
       <StatusBar style="auto" />
       <Box flex="1" position={"relative"} zIndex="100">
         {/* navigation bar */}
-        <HStack width="full" py="5" position={"relative"}>
+
+        <HStack width="full" py="10" position={"relative"}>
           <IconButton
-            onPress={() => nav.navigate("ProfileScreen")}
+            onPress={() => nav.goBack()}
             position="absolute"
             zIndex="10"
-            top="3"
-            left="5"
+            top="6"
+            left="7"
             icon={<ChevronLeftIcon size="lg" color="black" />}
           ></IconButton>
           <Text
@@ -196,7 +197,9 @@ const BookingScreen = () => {
                     <Input variant={"filled"} w="full" rounded="full"></Input>
                   </VStack>
                   <Box w="full" flexDir={"row"} my="2" justifyContent="center">
-                    <Pressable>
+                    <Pressable
+                      onPress={() => nav.navigate("SelectYourFlightScreen")}
+                    >
                       <Box
                         px="4"
                         py="2"
@@ -292,19 +295,11 @@ const BookingScreen = () => {
         </Animated.View>
       </Box>
       {/* background purple fillter */}
-      {/* <Box
-        opacity={0.5}
-        zIndex={2}
-        position="absolute"
-        bg={"#8B93DB"}
-        w="full"
-        h="full"
-      ></Box> */}
       <ImageBackground
         source={require("../assets/background.jpg")}
         style={{
           width: "100%",
-          height: "100%",
+          height: "110%",
           position: "absolute",
           opacity: 0.5,
           zIndex: 2,

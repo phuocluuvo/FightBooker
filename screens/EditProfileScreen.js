@@ -38,7 +38,7 @@ const EditProfileScreen = () => {
         }}
         style={{
           width: "100%",
-          height: "100%",
+          height: "110%",
           position: "absolute",
           opacity: 0.9,
           zIndex: 0,
@@ -54,12 +54,11 @@ const EditProfileScreen = () => {
           justifyContent={"space-evenly"}
           alignItems={"center"}
         >
-          <BlurView style={{ borderRadius: 9999 }}>
-            <IconButton
-              onPress={() => nav.navigate("ProfileScreen")}
-              icon={<ChevronLeftIcon size="lg" color={"white"} />}
-            ></IconButton>
-          </BlurView>
+          <IconButton
+            onPress={() => nav.goBack()}
+            icon={<ChevronLeftIcon size="lg" color={"white"} />}
+          ></IconButton>
+
           <Button variant={"link"}>
             <Text
               style={{
