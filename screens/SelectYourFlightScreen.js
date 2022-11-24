@@ -17,6 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ticket from "../components/Ticket";
 import { Box, Text } from "native-base";
 import axios from "axios";
+import { BlurView } from "expo-blur";
 // const DATA = [
 //   {
 //     timeStart: "7:05 AM",
@@ -59,27 +60,24 @@ export default function SelectYourFlightScreen() {
   const [DATA, setDATA] = useState();
   useEffect(() => {
     axios
-      .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataSelectYourFlightScreen")
+      .get(
+        "https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataSelectYourFlightScreen"
+      )
       .then((data) => setDATA(data.data));
-
   }, []);
-  const fAnim = useRef(new Animated.Value(65)).current
+  const fAnim = useRef(new Animated.Value(65)).current;
   const Move = () => {
     Animated.loop(
-      Animated.timing(
-        fAnim,
-        {
-          toValue: windowWidth-105,
-          duration: 4000,
-          useNativeDriver: false,
-        }
-      )
+      Animated.timing(fAnim, {
+        toValue: windowWidth - 105,
+        duration: 4000,
+        useNativeDriver: false,
+      })
     ).start();
-  }
+  };
   useEffect(() => {
-    Move()
-
-  }, [])
+    Move();
+  }, []);
   const nav = useNavigation();
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
@@ -102,15 +100,17 @@ export default function SelectYourFlightScreen() {
         }}
       ></LinearGradient> */}
       <ImageBackground
-        source={require("../assets/richard.png")}
+        source={require("../assets/6d724fed3957ccb6ecfd2ddf4bc3dc20.jpeg")}
         style={{
-          width: windowWidth,
-          height: (windowHeight * 3) / 4,
-          bottom: 0,
+          width: "100%",
+          height: "110%",
           position: "absolute",
+          opacity: 0.9,
+          zIndex: 0,
         }}
-        blurRadius={15}
-      />
+        resizeMode="cover"
+        blurRadius={120}
+      ></ImageBackground>
       <Image
         source={require("../assets/nasa.png")}
         style={{
@@ -147,11 +147,9 @@ export default function SelectYourFlightScreen() {
             position: "absolute",
             top: 135,
             marginLeft: fAnim,
-          }}>
-          <Ionicons
-            name="airplane"
-            size={30}
-          />
+          }}
+        >
+          <Ionicons name="airplane" size={30} />
         </Animated.View>
         <View
           style={{
@@ -205,7 +203,7 @@ export default function SelectYourFlightScreen() {
         }}
       >
         <TouchableOpacity onPress={() => nav.goBack()}>
-          <Ionicons name="chevron-back" size={25} color={"#000"} />
+          <Ionicons name="chevron-back" size={25} color={"white"} />
         </TouchableOpacity>
         <Text
           style={{
@@ -213,22 +211,20 @@ export default function SelectYourFlightScreen() {
             fontSize: 20,
             fontFamily: "Inter_900Black",
             flex: 1,
+            color: "white",
           }}
         >
           Select Your Flight
         </Text>
       </View>
 
-      <View
+      <BlurView
         style={{
           position: "absolute",
           width: windowWidth,
           height: (windowHeight / 4) * 3,
           left: 0,
           bottom: 0,
-          borderTopWidth: 1,
-          borderTopColor: "rgba(255, 255, 255, 0.4)",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
           padding: 10,
         }}
       >
@@ -271,6 +267,9 @@ export default function SelectYourFlightScreen() {
         <TouchableOpacity>
           <LinearGradient
             colors={["#81C6ED", "#346AD2"]}
+            start={[0, 1]}
+            end={[1.28, 0]}
+            locations={[0.16, 0.8]}
             style={{
               marginTop: 20,
               borderRadius: 20,
@@ -297,7 +296,7 @@ export default function SelectYourFlightScreen() {
             <Ticket item={item} handler={() => nav.navigate("BoardingPass")} />
           )}
         />
-      </View>
+      </BlurView>
     </SafeAreaView>
   );
 }

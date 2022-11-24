@@ -16,24 +16,21 @@ import axios from "axios";
 export default function SignInScreen() {
   const nav = useNavigation();
   const [visible, setVisible] = useState(true);
-  const [data, setData] = useState()
-  const [err, seterr] = useState("")
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState();
+  const [err, seterr] = useState("");
+  const [email, setEmail] = useState("trong@gmail.com");
+  const [password, setPassword] = useState("trong");
   useEffect(() => {
     axios
       .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/users")
       .then((data) => setData(data.data));
-
   }, []);
   const handelLogin = () => {
     if (data.some((u) => u.email == email && u.password == password)) {
-      nav.navigate("HomePageRoute")
-      seterr("")
-    }
-    else
-      seterr("Thông tin đăng nhập sai")
-  }
+      nav.navigate("HomePageRoute");
+      seterr("");
+    } else seterr("Thông tin đăng nhập sai");
+  };
   return (
     <SafeAreaView
       style={{
@@ -92,7 +89,7 @@ export default function SignInScreen() {
           backgroundColor={"#20232D"}
           value={email}
           onChangeText={(value) => setEmail(value)}
-          onPressIn={()=>seterr("")}
+          onPressIn={() => seterr("")}
         />
         <View
           style={{
@@ -149,13 +146,18 @@ export default function SignInScreen() {
         </TouchableOpacity>
         <Text
           style={{
-            color: '#E33333',
-            textAlign: 'center',
+            color: "#E33333",
+            textAlign: "center",
             fontSize: 16,
             margin: 10,
-          }}>{err}</Text>
+          }}
+        >
+          {err}
+        </Text>
         <TouchableOpacity
-          onPress={() => { handelLogin() }}
+          onPress={() => {
+            handelLogin();
+          }}
           style={{
             justifyContent: "center",
             alignItems: "center",

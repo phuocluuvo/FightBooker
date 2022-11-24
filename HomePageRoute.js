@@ -1,5 +1,4 @@
 import React, { useLayoutEffect } from "react";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import Homepage from "./screens/Homepage";
 import BoardingPass from "./screens/BoardingPass";
@@ -7,7 +6,9 @@ import BookingScreen from "./screens/BookingScreen";
 import Notifycation from "./screens/Notifycation";
 import { useNavigation } from "@react-navigation/native";
 import ProfileScreen from "./screens/ProfileScreen";
-const Tab = createMaterialBottomTabNavigator();
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BlurView } from "expo-blur";
+const Tab = createBottomTabNavigator();
 
 export default function HomePageRoute() {
   const nav = useNavigation();
@@ -19,16 +20,15 @@ export default function HomePageRoute() {
   return (
     <Tab.Navigator
       initialRouteName="Homepage"
-      activeColor="white"
       shifting
-      barStyle={{
-        position: "absolute",
-        backgroundColor: "#1E2B6F",
-        margin: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 40,
-        marginHorizontal: 40,
-        borderRadius: 48,
+      screenOptions={{
+        tabBarInactiveTintColor: "white",
+        tabBarActiveTintColor: "blue",
+        headerShown: false,
+        tabBarStyle: { position: "absolute" },
+        tabBarBackground: () => (
+          <BlurView tint="light" intensity={60} style={{ flex: 1 }} />
+        ),
       }}
     >
       <Tab.Screen

@@ -52,6 +52,18 @@ const BookingScreen = () => {
       }}
       safeArea
     >
+      <ImageBackground
+        source={require("../assets/6d724fed3957ccb6ecfd2ddf4bc3dc20.jpeg")}
+        style={{
+          width: "100%",
+          height: "110%",
+          position: "absolute",
+          opacity: 0.9,
+          zIndex: 0,
+        }}
+        resizeMode="cover"
+        blurRadius={110}
+      ></ImageBackground>
       <StatusBar style="auto" />
       <Box flex="1" position={"relative"} zIndex="100">
         {/* navigation bar */}
@@ -63,7 +75,7 @@ const BookingScreen = () => {
             zIndex="10"
             top="6"
             left="7"
-            icon={<ChevronLeftIcon size="lg" color="black" />}
+            icon={<ChevronLeftIcon size="lg" color="white" />}
           ></IconButton>
           <Text
             style={{
@@ -72,6 +84,7 @@ const BookingScreen = () => {
               width: "100%",
               lineHeight: 25,
               textAlign: "center",
+              color: "white",
             }}
           >
             Book Your Flight
@@ -81,11 +94,9 @@ const BookingScreen = () => {
         <BlurView
           style={{
             flex: 1,
-            marginTop: "40%",
-            borderTopColor: "#fff",
-            borderTopWidth: 1,
+            marginTop: "25%",
           }}
-          intensity={130}
+          intensity={60}
         >
           <KeyboardAvoidingView>
             <ScrollView horizontal w="full" py="4">
@@ -99,13 +110,13 @@ const BookingScreen = () => {
                     <Box
                       bg={
                         selected !== t.id
-                          ? "#fffa"
+                          ? "white:alpha.20"
                           : {
                               linearGradient: {
-                                end: { x: 0.3, y: 1 },
-                                start: { x: 0.5, y: 1 },
-                                locations: [0, 0.5],
-                                colors: ["#7ABEEB", "#3E75D6"],
+                                end: [1.28, 0],
+                                start: [0, 1],
+                                locations: [0.16, 0.8],
+                                colors: ["#7ABEEB", "#3E75D2"],
                               },
                             }
                       }
@@ -118,9 +129,9 @@ const BookingScreen = () => {
                       <Box
                         bg={{
                           linearGradient: {
-                            end: { x: 0.3, y: 1 },
-                            start: { x: 0.5, y: 1 },
-                            locations: [0, 0.5],
+                            end: [1, 0],
+                            start: [0, 1.28],
+                            locations: [0.16, 0.8],
                             colors:
                               selected !== t.id
                                 ? ["#7ABEEB", "#3E75D6"]
@@ -146,37 +157,39 @@ const BookingScreen = () => {
                 ))}
               </HStack>
             </ScrollView>
-            <Box m={"auto"}>
+            <Box m={"auto"} overflow="hidden" className="rounded-3xl">
               <BlurView
                 style={{
-                  borderColor: "#fff",
-                  borderWidth: 1,
                   width: 350,
-                  borderRadius: 20,
+
                   paddingHorizontal: 15,
                   paddingVertical: 30,
                 }}
-                intensity={200}
+                intensity={90}
               >
                 <VStack space={3}>
                   <VStack>
                     <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
                       Location:
                     </Text>
-                    <Input variant={"filled"} w="full" rounded="full"></Input>
+                    <Input w="full" bg="white:alpha.10" rounded="full"></Input>
                   </VStack>
                   <VStack>
                     <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
                       Desination:
                     </Text>
-                    <Input variant={"filled"} w="full" rounded="full"></Input>
+                    <Input bg="white:alpha.10" w="full" rounded="full"></Input>
                   </VStack>
                   <HStack space={3}>
                     <VStack flex="1">
                       <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
                         Departure:
                       </Text>
-                      <Input variant={"filled"} w="full" rounded="full"></Input>
+                      <Input
+                        bg="white:alpha.10"
+                        w="full"
+                        rounded="full"
+                      ></Input>
                     </VStack>
                     <VStack flex="1">
                       <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
@@ -184,7 +197,7 @@ const BookingScreen = () => {
                       </Text>
                       <Input
                         borderColor={"#FDFCFE"}
-                        variant={"filled"}
+                        bg="white:alpha.10"
                         w="full"
                         rounded="full"
                       ></Input>
@@ -194,7 +207,7 @@ const BookingScreen = () => {
                     <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
                       Passenger:
                     </Text>
-                    <Input variant={"filled"} w="full" rounded="full"></Input>
+                    <Input bg="white:alpha.10" w="full" rounded="full"></Input>
                   </VStack>
                   <Box w="full" flexDir={"row"} my="2" justifyContent="center">
                     <Pressable
@@ -206,9 +219,9 @@ const BookingScreen = () => {
                         rounded="2xl"
                         bg={{
                           linearGradient: {
-                            start: { x: 0.4, y: 0 },
-                            end: { x: 0.55, y: 0 },
-                            locations: [0.3, 0.85],
+                            end: [1.28, 0],
+                            start: [0, 1],
+                            locations: [0.16, 0.8],
                             colors: ["#81C6ED", "#346AD2"],
                           },
                         }}
@@ -258,13 +271,11 @@ const BookingScreen = () => {
               width: 360,
               height: 250,
             }}
-            source={{
-              uri: "https://s3-alpha-sig.figma.com/img/46f1/eeef/0afbc71956512f36c723261aaaf130b8?Expires=1670198400&Signature=GZwWuZYWwfCSYr0n9Y7~wFjfTXF6fFu0CFNkH9ydWfBeIi0IX2PkCZH76C72wbOQoYSw9y6JVgCeQ3QMsFPeStTWTDKIYcWxfOXkKRfE5E5GNobiiEyyyS0-hyMkxufja0Cs5Wag8jct5FHqag8i3Ho~EzIcz3zKtG0esL0W6w73e1kghT~u19CpoJsJvuWZF4B1adAvLa2xj2VYsJEcS2nCt7hNbhRwMxmXjCJyBTLQmuLUW0QDjR9UVuv6eKiqF0PfA8405nK5kRJ1mQ09uUTIVx9ogREvJAAMJCJQmrSibNi96lnFJTQUwbCVb-r5styTk1Urzp20lE7kTw20SQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-            }}
+            source={require("../assets/0afbc71956512f36c723261aaaf130b8.png")}
           ></ImageBackground>
         </Animated.View>
         <Animated.View
-          entering={PinwheelIn.duration(5000).delay(100)}
+          entering={PinwheelIn.duration(5000)}
           layout={Layout.damping()}
           exiting={PinwheelOut}
           style={{
@@ -288,9 +299,7 @@ const BookingScreen = () => {
               height: 650,
             }}
             alt="plane"
-            source={{
-              uri: "https://www.figma.com/file/3NB1gqrjWm2EBSQ6m1Eoyq/image/edab109591a5da7fbe9bb81aef5e8843a1dc3c5c?fuid=931003954664940227",
-            }}
+            source={require("../assets/91a5da7fbe9bb81aef5e8843a1dc3c5c.png")}
           ></ImageBackground>
         </Animated.View>
       </Box>

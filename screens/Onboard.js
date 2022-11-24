@@ -42,11 +42,13 @@ const Onboard = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const isCarousel = React.useRef(null);
   const [index, setIndex] = useState(0);
-  const [data,setData]=useState();
+  const [data, setData] = useState();
 
   useEffect(() => {
     axios
-      .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataOnboard")
+      .get(
+        "https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataOnboard"
+      )
       .then((data) => setData(data.data));
   }, []);
   useEffect(() => {

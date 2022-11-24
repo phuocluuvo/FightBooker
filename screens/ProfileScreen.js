@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  Center,
   ChevronLeftIcon,
   ChevronRightIcon,
   Divider,
@@ -14,7 +15,7 @@ import {
   Text,
   VStack,
 } from "native-base";
-import { ImageBackground, TouchableOpacity } from "react-native";
+import { ImageBackground, TouchableOpacity, View } from "react-native";
 import {
   AntDesign,
   FontAwesome,
@@ -44,9 +45,7 @@ const ProfileScreen = () => {
       safeArea
     >
       <ImageBackground
-        source={{
-          uri: "https://s3-alpha-sig.figma.com/img/875f/1388/6d724fed3957ccb6ecfd2ddf4bc3dc20?Expires=1670198400&Signature=AzT-YPHY-IfP6xM-wtqPUjqxN29Qzk997L~27zbkezqTVl25FgAnuc-08QlmiN3QlzlsD3y9jEg-qzSaBb83qp6a-FfDGsivpCIfInRbCIYSkefqTjWb099f9CRnT5gewl7cgGT2NIcv8DEOJVGpevM7BYsTiFGxq8L6G-MrXFFxL74a-TxufhyG3U5O7Lfp8GKw-sLJeYlVf17xVDSh12PJf1l65zqLintObghAatJcAlZd5hGda5wgUrJgbJHWgkhNKDI3UVSWh5aai-GV50xx0~wOTXkRUY45JqAz67krAkJRggZ2hz7Fv~UAXBoaTPJFYLmTm6KGwtRwgydsxw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-        }}
+        source={require("../assets/6d724fed3957ccb6ecfd2ddf4bc3dc20.jpeg")}
         style={{
           width: "100%",
           height: "110%",
@@ -106,149 +105,97 @@ const ProfileScreen = () => {
             fuharrypotter@gmail.com
           </Text>
         </VStack>
-        <BlurView
-          intensity={50}
-          style={{
-            borderRadius: 20,
-            paddingHorizontal: 10,
-            paddingVertical: 7,
-            marginHorizontal: 20,
-            marginVertical: 10,
-          }}
-        >
-          <HStack
-            space={3}
-            justifyContent={"space-evenly"}
-            divider={<Divider orientation="vertical" color={"white"}></Divider>}
-          >
-            <VStack alignItems={"center"}>
-              <Text fontSize={"xl"} color="white" fontWeight="bold">
-                Reward Points
-              </Text>
-              <Text color="blue.500" fontSize={"xl"} fontWeight="bold">
-                360
-              </Text>
-            </VStack>
-            <VStack alignItems={"center"}>
-              <Text fontSize={"xl"} color="white" fontWeight="bold">
-                Flight Numbers
-              </Text>
-              <Text color="blue.500" fontSize={"xl"} fontWeight="bold">
-                12
-              </Text>
-            </VStack>
-            <VStack alignItems={"center"}>
-              <Text fontSize={"xl"} color="white" fontWeight="bold">
-                Rank
-              </Text>
-              <Text color="blue.500" fontSize={"xl"} fontWeight="bold">
-                Diamond
-              </Text>
-            </VStack>
-          </HStack>
-        </BlurView>
-        <BlurView
-          intensity={50}
-          style={{
-            borderRadius: 20,
-            paddingHorizontal: 5,
-            paddingVertical: 3,
-            marginHorizontal: 20,
-            marginVertical: 10,
-          }}
-        >
-          <VStack
-            w="full"
-            rounded={"lg"}
-            px="5"
-            space={3}
-            divider={<Divider color={"white"}></Divider>}
-          >
-            <TouchableOpacity>
-              <HStack p="5" pb="3">
-                <FontAwesome name="user" size={24} color="white" />
-                <Text
-                  flex="1"
-                  px="2"
-                  fontSize="xl"
-                  fontWeight={"bold"}
-                  color="white"
-                >
-                  Profile
-                </Text>
-                <ChevronRightIcon size="sm" color="white" />
-              </HStack>
-            </TouchableOpacity>
+        <Center>
+          <View style={{ overflow: "hidden" }} className="w-[90%] rounded-3xl">
+            <BlurView intensity={70}>
+              <VStack px="5" space={3}>
+                <TouchableOpacity>
+                  <HStack p="3" mt={2}>
+                    <FontAwesome name="user" size={24} color="white" />
+                    <Text
+                      flex="1"
+                      px="2"
+                      fontSize="xl"
+                      fontWeight={"bold"}
+                      color="white"
+                    >
+                      Profile
+                    </Text>
+                    <ChevronRightIcon size="sm" color="white" />
+                  </HStack>
+                </TouchableOpacity>
 
-            <TouchableOpacity>
-              <HStack p="5" pb="3">
-                <Ionicons name="md-bookmark" size={24} color="white" />
-                <Text
-                  flex="1"
-                  px="2"
-                  fontSize="xl"
-                  color="white"
-                  fontWeight={"bold"}
-                >
-                  Bookmarked
-                </Text>
-                <ChevronRightIcon size="sm" color="white" />
-              </HStack>
-            </TouchableOpacity>
+                <TouchableOpacity>
+                  <HStack p="3">
+                    <Ionicons name="md-bookmark" size={24} color="white" />
+                    <Text
+                      flex="1"
+                      px="2"
+                      fontSize="xl"
+                      color="white"
+                      fontWeight={"bold"}
+                    >
+                      Bookmarked
+                    </Text>
+                    <ChevronRightIcon size="sm" color="white" />
+                  </HStack>
+                </TouchableOpacity>
 
-            <TouchableOpacity>
-              <HStack p="5" pb="3">
-                <Fontisto name="plane-ticket" size={24} color="white" />
-                <Text
-                  flex="1"
-                  px="2"
-                  fontSize="xl"
-                  color="white"
-                  fontWeight={"bold"}
-                >
-                  Trips History
-                </Text>
-                <ChevronRightIcon size="sm" color="white" />
-              </HStack>
-            </TouchableOpacity>
+                <TouchableOpacity>
+                  <HStack p="3">
+                    <Fontisto name="plane-ticket" size={24} color="white" />
+                    <Text
+                      flex="1"
+                      px="2"
+                      fontSize="xl"
+                      color="white"
+                      fontWeight={"bold"}
+                    >
+                      Trips History
+                    </Text>
+                    <ChevronRightIcon size="sm" color="white" />
+                  </HStack>
+                </TouchableOpacity>
 
-            <TouchableOpacity>
-              <HStack p="5" pb="3">
-                <AntDesign name="setting" size={24} color="white" />
-                <Text
-                  flex="1"
-                  px="2"
-                  fontSize="xl"
-                  color="white"
-                  fontWeight={"bold"}
-                >
-                  Settings
-                </Text>
-                <ChevronRightIcon size="sm" color="white" />
-              </HStack>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => nav.navigate("SignInScreen")}>
-              <HStack p="5" pb="3">
-                <MaterialCommunityIcons
-                  name="logout-variant"
-                  size={24}
-                  color="white"
-                />
-                <Text
-                  flex="1"
-                  px="2"
-                  fontSize="xl"
-                  color="white"
-                  fontWeight={"bold"}
-                >
-                  Log out
-                </Text>
-                <ChevronRightIcon size="sm" color="white" />
-              </HStack>
-            </TouchableOpacity>
-            <Box></Box>
-          </VStack>
-        </BlurView>
+                <TouchableOpacity>
+                  <HStack p="3">
+                    <AntDesign name="setting" size={24} color="white" />
+                    <Text
+                      flex="1"
+                      px="2"
+                      fontSize="xl"
+                      color="white"
+                      fontWeight={"bold"}
+                    >
+                      Settings
+                    </Text>
+                    <ChevronRightIcon size="sm" color="white" />
+                  </HStack>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => nav.navigate("SignInScreen")}>
+                  <HStack p="3">
+                    <MaterialCommunityIcons
+                      name="logout-variant"
+                      size={24}
+                      color="white"
+                    />
+                    <Text
+                      flex="1"
+                      px="2"
+                      fontSize="xl"
+                      color="white"
+                      fontWeight={"bold"}
+                    >
+                      Log out
+                    </Text>
+                    <ChevronRightIcon size="sm" color="white" />
+                  </HStack>
+                </TouchableOpacity>
+                <Box></Box>
+              </VStack>
+            </BlurView>
+          </View>
+        </Center>
       </Box>
     </Box>
   );

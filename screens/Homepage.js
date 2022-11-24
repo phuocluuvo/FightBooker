@@ -24,6 +24,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import axios from "axios";
+import { BlurView } from "expo-blur";
 // const data = [
 //   {
 //     city: "Paris",
@@ -45,12 +46,11 @@ import axios from "axios";
 //   },
 // ];
 const Homepage = () => {
-  const [data,setData]=useState()
+  const [data, setData] = useState();
   useEffect(() => {
     axios
       .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataHome")
       .then((data) => setData(data.data));
-
   }, []);
   return (
     <ScrollView>
@@ -62,14 +62,13 @@ const Homepage = () => {
         bg={{
           linearGradient: {
             colors: ["#FCFCFE", "#A3BFF3"],
-            start: [0.2, 0.1],
+            start: [0, 0],
+            end: [0, 1],
           },
         }}
       >
         <ImageBackground
-          source={{
-            uri: "https://s3-alpha-sig.figma.com/img/875f/1388/6d724fed3957ccb6ecfd2ddf4bc3dc20?Expires=1670198400&Signature=AzT-YPHY-IfP6xM-wtqPUjqxN29Qzk997L~27zbkezqTVl25FgAnuc-08QlmiN3QlzlsD3y9jEg-qzSaBb83qp6a-FfDGsivpCIfInRbCIYSkefqTjWb099f9CRnT5gewl7cgGT2NIcv8DEOJVGpevM7BYsTiFGxq8L6G-MrXFFxL74a-TxufhyG3U5O7Lfp8GKw-sLJeYlVf17xVDSh12PJf1l65zqLintObghAatJcAlZd5hGda5wgUrJgbJHWgkhNKDI3UVSWh5aai-GV50xx0~wOTXkRUY45JqAz67krAkJRggZ2hz7Fv~UAXBoaTPJFYLmTm6KGwtRwgydsxw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-          }}
+          source={require("../assets/6d724fed3957ccb6ecfd2ddf4bc3dc20.jpeg")}
           style={{
             width: "100%",
             height: "110%",
@@ -78,7 +77,7 @@ const Homepage = () => {
             zIndex: 0,
           }}
           resizeMode="cover"
-          blurRadius={170}
+          blurRadius={110}
         ></ImageBackground>
         <StatusBar style="auto"></StatusBar>
         <HStack className="w-full items-center p-5">
@@ -174,49 +173,57 @@ const Homepage = () => {
             horizontal
             renderItem={({ item }) => {
               return (
-                <View
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
-                  className="p-3 rounded-xl ml-5 mt-5 items-center drop-shadow-xl"
-                >
-                  <ImageBackground
-                    source={{ uri: item.img }}
-                    imageStyle={{
-                      borderTopLeftRadius: 5,
-                      borderTopRightRadius: 5,
-                    }}
-                    className="p-3 items-end h-[160] w-[150]"
+                <Center className="mt-2">
+                  <View
+                    style={{ overflow: "hidden" }}
+                    className="rounded-2xl ml-6"
                   >
-                    <Feather name="heart" size={24} color="white" />
-                  </ImageBackground>
-                  <View className="flex-row pt-2">
-                    <View className="justify-center">
-                      <Ionicons
-                        name="ios-location-sharp"
-                        size={24}
-                        color="#346AD2"
-                      />
-                    </View>
-                    <View>
-                      <Text color="white" className="font-bold">
-                        {item.city}
-                      </Text>
-                      <View className="flex-row">
-                        <Text
-                          color="white"
-                          className="text-[16px] text-slate-400"
-                        >
-                          {item.country}
-                        </Text>
-                        <View className="flex-row">
-                          <Text color="white" className="text-[16px]">
-                            4.5
+                    <BlurView className="p-3 " intensity={120}>
+                      <ImageBackground
+                        source={{ uri: item.img }}
+                        imageStyle={{
+                          borderTopLeftRadius: 5,
+                          borderTopRightRadius: 5,
+                        }}
+                        className="p-3 items-end h-[160] w-[150]"
+                      >
+                        <Feather name="heart" size={24} color="white" />
+                      </ImageBackground>
+                      <View className="flex-row pt-2">
+                        <View className="justify-center">
+                          <Ionicons
+                            name="ios-location-sharp"
+                            size={24}
+                            color="#346AD2"
+                          />
+                        </View>
+                        <View>
+                          <Text color="white" className="font-bold">
+                            {item.city}
                           </Text>
-                          <FontAwesome name="star" size={16} color="black" />
+                          <View className="flex-row">
+                            <Text
+                              color="white"
+                              className="text-[16px] text-slate-400"
+                            >
+                              {item.country}
+                            </Text>
+                            <View className="flex-row">
+                              <Text color="white" className="text-[16px]">
+                                4.5
+                              </Text>
+                              <FontAwesome
+                                name="star"
+                                size={16}
+                                color="black"
+                              />
+                            </View>
+                          </View>
                         </View>
                       </View>
-                    </View>
+                    </BlurView>
                   </View>
-                </View>
+                </Center>
               );
             }}
           ></FlatList>
@@ -235,49 +242,53 @@ const Homepage = () => {
             horizontal
             renderItem={({ item }) => {
               return (
-                <View
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
-                  className="p-3 rounded-xl ml-5 mt-5 items-center drop-shadow-xl"
-                >
-                  <ImageBackground
-                    source={{ uri: item.img }}
-                    imageStyle={{
-                      borderTopLeftRadius: 5,
-                      borderTopRightRadius: 5,
-                    }}
-                    className="p-3 items-end h-[160] w-[150]"
+                <Center className="mt-2">
+                  <View
+                    style={{ overflow: "hidden" }}
+                    className="rounded-2xl ml-6"
                   >
-                    <Feather name="heart" size={24} color="white" />
-                  </ImageBackground>
-                  <View className="flex-row pt-2">
-                    <View className="justify-center">
-                      <Ionicons
-                        name="ios-location-sharp"
-                        size={24}
-                        color="#346AD2"
-                      />
-                    </View>
-                    <Box w="120">
-                      <Text color="white" className="font-bold">
-                        {item.city}
-                      </Text>
-                      <HStack className="justify-between w-full">
-                        <Text color="white" className="text-[16px]">
-                          {item.country}
-                        </Text>
-                        <View className="flex-row w-full ">
-                          <Text
-                            color="white"
-                            style={{ fontFamily: "Inter_900Black" }}
-                            className="text-[16px]"
-                          >
-                            ${item.price}
-                          </Text>
+                    <BlurView className="p-3 " intensity={120}>
+                      <ImageBackground
+                        source={{ uri: item.img }}
+                        imageStyle={{
+                          borderTopLeftRadius: 5,
+                          borderTopRightRadius: 5,
+                        }}
+                        className="p-3 items-end h-[160] w-[150]"
+                      >
+                        <Feather name="heart" size={24} color="white" />
+                      </ImageBackground>
+                      <View className="flex-row pt-2">
+                        <View className="justify-center">
+                          <Ionicons
+                            name="ios-location-sharp"
+                            size={24}
+                            color="#346AD2"
+                          />
                         </View>
-                      </HStack>
-                    </Box>
+                        <Box w="120">
+                          <Text color="white" className="font-bold">
+                            {item.city}
+                          </Text>
+                          <HStack className="justify-between w-full">
+                            <Text color="white" className="text-[16px]">
+                              {item.country}
+                            </Text>
+                            <View className="flex-row w-full ">
+                              <Text
+                                color="white"
+                                style={{ fontFamily: "Inter_900Black" }}
+                                className="text-[16px]"
+                              >
+                                ${item.price}
+                              </Text>
+                            </View>
+                          </HStack>
+                        </Box>
+                      </View>
+                    </BlurView>
                   </View>
-                </View>
+                </Center>
               );
             }}
           ></FlatList>
