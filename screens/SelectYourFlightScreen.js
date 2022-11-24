@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -15,45 +15,53 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import Ticket from "../components/Ticket";
 import { Box, Text } from "native-base";
-const DATA = [
-  {
-    timeStart: "7:05 AM",
-    timeEnd: "8:05 PM",
-    timing: "13:00",
-    start: "YUL",
-    end: "NRT",
-    nameAir: "Air Canada",
-    price: "$1.400",
-  },
-  {
-    timeStart: "9:05 AM",
-    timeEnd: "4:55 PM",
-    timing: "18:55",
-    start: "YUL",
-    end: "NRT",
-    nameAir: "Scoot",
-    price: "$1.300",
-  },
-  {
-    timeStart: "10:00 AM",
-    timeEnd: "11:00 PM",
-    timing: "13:00",
-    start: "YUL",
-    end: "NRT",
-    nameAir: "Air Canada",
-    price: "$1.400",
-  },
-  {
-    timeStart: "7:05 AM",
-    timeEnd: "8:05 PM",
-    timing: "13:00",
-    start: "YUL",
-    end: "NRT",
-    nameAir: "Air Canada",
-    price: "$1.400",
-  },
-];
+import axios from "axios";
+// const DATA = [
+//   {
+//     timeStart: "7:05 AM",
+//     timeEnd: "8:05 PM",
+//     timing: "13:00",
+//     start: "YUL",
+//     end: "NRT",
+//     nameAir: "Air Canada",
+//     price: "$1.400",
+//   },
+//   {
+//     timeStart: "9:05 AM",
+//     timeEnd: "4:55 PM",
+//     timing: "18:55",
+//     start: "YUL",
+//     end: "NRT",
+//     nameAir: "Scoot",
+//     price: "$1.300",
+//   },
+//   {
+//     timeStart: "10:00 AM",
+//     timeEnd: "11:00 PM",
+//     timing: "13:00",
+//     start: "YUL",
+//     end: "NRT",
+//     nameAir: "Air Canada",
+//     price: "$1.400",
+//   },
+//   {
+//     timeStart: "7:05 AM",
+//     timeEnd: "8:05 PM",
+//     timing: "13:00",
+//     start: "YUL",
+//     end: "NRT",
+//     nameAir: "Air Canada",
+//     price: "$1.400",
+//   },
+// ];
 export default function SelectYourFlightScreen() {
+  const [DATA,setDATA]=useState();
+  useEffect(() => {
+    axios
+      .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataSelectYourFlightScreen")
+      .then((data) => setDATA(data.data));
+
+  }, []);
   const nav = useNavigation();
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
