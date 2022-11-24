@@ -27,26 +27,7 @@ import axios from "axios";
 import { BlurView } from "expo-blur";
 import { DataContext } from "../provider/Provider";
 import { useNavigation } from "@react-navigation/native";
-// const data = [
-//   {
-//     city: "Paris",
-//     country: "France",
-//     price: 450,
-//     img: "https://images.pexels.com/photos/1125212/pexels-photo-1125212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   },
-//   {
-//     city: "Bali",
-//     country: "Indonesia",
-//     price: 375,
-//     img: "https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   },
-//   {
-//     city: "Moscow",
-//     country: "Russia",
-//     price: 365,
-//     img: "https://images.pexels.com/photos/92412/pexels-photo-92412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   },
-// ];
+
 const Homepage = () => {
   const [data1, setData1] = useState();
   const { user, setData, setD } = useContext(DataContext);
