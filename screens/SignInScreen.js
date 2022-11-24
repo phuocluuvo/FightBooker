@@ -7,14 +7,33 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 export default function SignInScreen() {
   const nav = useNavigation();
   const [visible, setVisible] = useState(true);
+  const [data, setData] = useState()
+  const [err, seterr] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  useEffect(() => {
+    axios
+      .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/users")
+      .then((data) => setData(data.data));
+
+  }, []);
+  const handelLogin = () => {
+    if (data.some((u) => u.email == email && u.password == password)) {
+      nav.navigate("HomePageRoute")
+      seterr("")
+    }
+    else
+      seterr("Thông tin đăng nhập sai")
+  }
   return (
     <SafeAreaView
       style={{
@@ -59,9 +78,6 @@ export default function SignInScreen() {
           Please sign in to continue our app
         </Text>
         <TextInput
-          placeholder="Email"
-          placeholderTextColor={"#7D848D"}
-          backgroundColor={"#20232D"}
           style={{
             color: "#fff",
             width: "100%",
@@ -71,6 +87,12 @@ export default function SignInScreen() {
             borderRadius: 10,
             marginTop: 50,
           }}
+          placeholder="Email"
+          placeholderTextColor={"#7D848D"}
+          backgroundColor={"#20232D"}
+          value={email}
+          onChangeText={(value) => setEmail(value)}
+          onPressIn={()=>seterr("")}
         />
         <View
           style={{
@@ -93,6 +115,9 @@ export default function SignInScreen() {
             placeholder="Password"
             placeholderTextColor={"#7D848D"}
             secureTextEntry={visible}
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+            onPressIn={() => seterr("")}
           />
           <TouchableOpacity
             style={{ width: "10%" }}
@@ -122,8 +147,15 @@ export default function SignInScreen() {
             Forget Password?
           </Text>
         </TouchableOpacity>
+        <Text
+          style={{
+            color: '#E33333',
+            textAlign: 'center',
+            fontSize: 16,
+            margin: 10,
+          }}>{err}</Text>
         <TouchableOpacity
-          onPress={() => nav.navigate("HomePageRoute")}
+          onPress={() => { handelLogin() }}
           style={{
             justifyContent: "center",
             alignItems: "center",
