@@ -6,7 +6,7 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Avatar,
@@ -25,6 +25,8 @@ import {
 } from "@expo/vector-icons";
 import axios from "axios";
 import { BlurView } from "expo-blur";
+import { DataContext } from "../provider/Provider";
+import { useNavigation } from "@react-navigation/native";
 // const data = [
 //   {
 //     city: "Paris",
@@ -46,11 +48,13 @@ import { BlurView } from "expo-blur";
 //   },
 // ];
 const Homepage = () => {
-  const [data, setData] = useState();
+  const [data1, setData1] = useState();
+  const { user, setData, setD } = useContext(DataContext);
+  const nav = useNavigation();
   useEffect(() => {
     axios
       .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataHome")
-      .then((data) => setData(data.data));
+      .then((data1) => setData1(data1.data));
   }, []);
   return (
     <ScrollView>
@@ -84,14 +88,14 @@ const Homepage = () => {
           <Avatar
             mx="2"
             source={{
-              uri: "https://th.bing.com/th/id/R.fa80875ff296e70099950717d1efd03c?rik=mclEqGePnpFZQA&riu=http%3a%2f%2ffc00.deviantart.net%2ffs71%2ff%2f2011%2f342%2f3%2fa%2fthere_goes_that_weird_guy_with_the_mustache_by_angelak47-d4ihllt.jpg&ehk=lxXeQ4cy1sef0bv49hpgsIHHsByZy%2bc%2bZAS3ITaXfWw%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+              uri: user.pic,
             }}
           />
           <Text color="white" className="text-lg">
             Hi,{" "}
           </Text>
           <Text color="white" className="text-lg font-bold">
-            Mustadermort!
+            {user.name}
           </Text>
         </HStack>
         <View className="items-center">
@@ -169,61 +173,76 @@ const Homepage = () => {
           </Text>
           <FlatList
             className="w-full"
-            data={data}
+            data={data1}
             horizontal
             renderItem={({ item }) => {
               return (
-                <Center className="mt-2">
-                  <View
-                    style={{ overflow: "hidden" }}
-                    className="rounded-2xl ml-6"
-                  >
-                    <BlurView className="p-3 " intensity={120}>
-                      <ImageBackground
-                        source={{ uri: item.img }}
-                        imageStyle={{
-                          borderTopLeftRadius: 5,
-                          borderTopRightRadius: 5,
-                        }}
-                        className="p-3 items-end h-[160] w-[150]"
-                      >
-                        <Feather name="heart" size={24} color="white" />
-                      </ImageBackground>
-                      <View className="flex-row pt-2">
-                        <View className="justify-center">
-                          <Ionicons
-                            name="ios-location-sharp"
-                            size={24}
-                            color="#346AD2"
-                          />
-                        </View>
-                        <View>
-                          <Text color="white" className="font-bold">
-                            {item.city}
-                          </Text>
-                          <View className="flex-row">
-                            <Text
-                              color="white"
-                              className="text-[16px] text-slate-400"
-                            >
-                              {item.country}
+                <TouchableOpacity
+                  onPress={() => {
+                    fetch(
+                      "https://633f93fb0dbc3309f3cce759.mockapi.io/api/flight"
+                    )
+                      .then((data) => data.json())
+                      .then((data) => {
+                        setData(data.filter((x) => x.desination == item.city));
+
+                        setD(item.city);
+                        nav.navigate("SelectYourFlightScreen");
+                      });
+                  }}
+                >
+                  <Center className="mt-2">
+                    <View
+                      style={{ overflow: "hidden" }}
+                      className="rounded-2xl ml-6"
+                    >
+                      <BlurView className="p-3 " intensity={120}>
+                        <ImageBackground
+                          source={{ uri: item.img }}
+                          imageStyle={{
+                            borderTopLeftRadius: 5,
+                            borderTopRightRadius: 5,
+                          }}
+                          className="p-3 items-end h-[160] w-[150]"
+                        >
+                          <Feather name="heart" size={24} color="white" />
+                        </ImageBackground>
+                        <View className="flex-row pt-2">
+                          <View className="justify-center">
+                            <Ionicons
+                              name="ios-location-sharp"
+                              size={24}
+                              color="#346AD2"
+                            />
+                          </View>
+                          <View>
+                            <Text color="white" className="font-bold">
+                              {item.city}
                             </Text>
                             <View className="flex-row">
-                              <Text color="white" className="text-[16px]">
-                                4.5
+                              <Text
+                                color="white"
+                                className="text-[16px] text-slate-400"
+                              >
+                                {item.country}
                               </Text>
-                              <FontAwesome
-                                name="star"
-                                size={16}
-                                color="black"
-                              />
+                              <View className="flex-row">
+                                <Text color="white" className="text-[16px]">
+                                  4.5
+                                </Text>
+                                <FontAwesome
+                                  name="star"
+                                  size={16}
+                                  color="black"
+                                />
+                              </View>
                             </View>
                           </View>
                         </View>
-                      </View>
-                    </BlurView>
-                  </View>
-                </Center>
+                      </BlurView>
+                    </View>
+                  </Center>
+                </TouchableOpacity>
               );
             }}
           ></FlatList>
@@ -238,57 +257,76 @@ const Homepage = () => {
           </Text>
           <FlatList
             className="w-full"
-            data={data}
+            data={data1}
             horizontal
             renderItem={({ item }) => {
               return (
-                <Center className="mt-2">
-                  <View
-                    style={{ overflow: "hidden" }}
-                    className="rounded-2xl ml-6"
-                  >
-                    <BlurView className="p-3 " intensity={120}>
-                      <ImageBackground
-                        source={{ uri: item.img }}
-                        imageStyle={{
-                          borderTopLeftRadius: 5,
-                          borderTopRightRadius: 5,
-                        }}
-                        className="p-3 items-end h-[160] w-[150]"
-                      >
-                        <Feather name="heart" size={24} color="white" />
-                      </ImageBackground>
-                      <View className="flex-row pt-2">
-                        <View className="justify-center">
-                          <Ionicons
-                            name="ios-location-sharp"
-                            size={24}
-                            color="#346AD2"
-                          />
-                        </View>
-                        <Box w="120">
-                          <Text color="white" className="font-bold">
-                            {item.city}
-                          </Text>
-                          <HStack className="justify-between w-full">
-                            <Text color="white" className="text-[16px]">
-                              {item.country}
+                <TouchableOpacity
+                  onPress={() => {
+                    fetch(
+                      "https://633f93fb0dbc3309f3cce759.mockapi.io/api/flight"
+                    )
+                      .then((data) => data.json())
+                      .then((data) => {
+                        setData(data.filter((x) => x.desination == item.city));
+
+                        setD(item.city);
+                        nav.navigate("SelectYourFlightScreen");
+                      });
+                  }}
+                >
+                  <Center className="mt-2">
+                    <View
+                      style={{ overflow: "hidden" }}
+                      className="rounded-2xl ml-6"
+                    >
+                      <BlurView className="p-3 " intensity={120}>
+                        <ImageBackground
+                          source={{ uri: item.img }}
+                          imageStyle={{
+                            borderTopLeftRadius: 5,
+                            borderTopRightRadius: 5,
+                          }}
+                          className="p-3 items-end h-[160] w-[150]"
+                        >
+                          <Feather name="heart" size={24} color="white" />
+                        </ImageBackground>
+                        <View className="flex-row pt-2">
+                          <View className="justify-center">
+                            <Ionicons
+                              name="ios-location-sharp"
+                              size={24}
+                              color="#346AD2"
+                            />
+                          </View>
+                          <View>
+                            <Text color="white" className="font-bold">
+                              {item.city}
                             </Text>
-                            <View className="flex-row w-full ">
+                            <View className="flex-row">
                               <Text
                                 color="white"
-                                style={{ fontFamily: "Inter_900Black" }}
-                                className="text-[16px]"
+                                className="text-[16px] text-slate-400"
                               >
-                                ${item.price}
+                                {item.country}
                               </Text>
+                              <View className="flex-row">
+                                <Text color="white" className="text-[16px]">
+                                  4.5
+                                </Text>
+                                <FontAwesome
+                                  name="star"
+                                  size={16}
+                                  color="black"
+                                />
+                              </View>
                             </View>
-                          </HStack>
-                        </Box>
-                      </View>
-                    </BlurView>
-                  </View>
-                </Center>
+                          </View>
+                        </View>
+                      </BlurView>
+                    </View>
+                  </Center>
+                </TouchableOpacity>
               );
             }}
           ></FlatList>

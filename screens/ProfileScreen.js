@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Avatar,
@@ -26,10 +26,11 @@ import {
 } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { useNavigation } from "@react-navigation/native";
+import { DataContext } from "../provider/Provider";
 
 const ProfileScreen = () => {
   const nav = useNavigation();
-
+  const { user } = useContext(DataContext);
   return (
     <Box
       flex={1}
@@ -95,14 +96,14 @@ const ProfileScreen = () => {
           <Avatar
             size="2xl"
             source={{
-              uri: "https://th.bing.com/th/id/R.fa80875ff296e70099950717d1efd03c?rik=mclEqGePnpFZQA&riu=http%3a%2f%2ffc00.deviantart.net%2ffs71%2ff%2f2011%2f342%2f3%2fa%2fthere_goes_that_weird_guy_with_the_mustache_by_angelak47-d4ihllt.jpg&ehk=lxXeQ4cy1sef0bv49hpgsIHHsByZy%2bc%2bZAS3ITaXfWw%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+              uri: user.pic,
             }}
           ></Avatar>
           <Text fontSize="2xl" color="white">
-            Mustadermort
+            {user.name}
           </Text>
           <Text fontSize="sm" color="white" opacity={0.7}>
-            fuharrypotter@gmail.com
+            {user.email}
           </Text>
         </VStack>
         <Center>

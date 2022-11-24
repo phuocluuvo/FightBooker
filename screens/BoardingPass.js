@@ -18,7 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { DataContext } from "../provider/Provider";
 
 export default function BoardingPass() {
-  const { bp } = useContext(DataContext);
+  const { bp, user } = useContext(DataContext);
   console.log(bp);
 
   const nav = useNavigation();
@@ -183,12 +183,14 @@ export default function BoardingPass() {
                         <Avatar
                           mr="2"
                           source={{
-                            uri: "https://th.bing.com/th/id/R.fa80875ff296e70099950717d1efd03c?rik=mclEqGePnpFZQA&riu=http%3a%2f%2ffc00.deviantart.net%2ffs71%2ff%2f2011%2f342%2f3%2fa%2fthere_goes_that_weird_guy_with_the_mustache_by_angelak47-d4ihllt.jpg&ehk=lxXeQ4cy1sef0bv49hpgsIHHsByZy%2bc%2bZAS3ITaXfWw%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1",
+                            uri: user.pic,
                           }}
                         ></Avatar>
                         <VStack>
-                          <Text>Mustadermort</Text>
-                          <Text>124 years, Female</Text>
+                          <Text>{user.name}</Text>
+                          <Text>
+                            {user.age} years, {user.sex}
+                          </Text>
                         </VStack>
                       </HStack>
                       <HStack alignItems="center">

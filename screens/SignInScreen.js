@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { DataContext } from "../provider/Provider";
 
 export default function SignInScreen() {
   const nav = useNavigation();
@@ -20,14 +21,19 @@ export default function SignInScreen() {
   const [err, seterr] = useState("");
   const [email, setEmail] = useState("trong@gmail.com");
   const [password, setPassword] = useState("trong");
+  const { setUser, user } = useContext(DataContext);
   useEffect(() => {
     axios
-      .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/users")
+      .get("https://633f93fb0dbc3309f3cce759.mockapi.io/api/user")
       .then((data) => setData(data.data));
   }, []);
   const handelLogin = () => {
     if (data.some((u) => u.email == email && u.password == password)) {
+      setUser(
+        data.filter((u) => u.email == email && u.password == password)[0]
+      );
       nav.navigate("HomePageRoute");
+
       seterr("");
     } else seterr("Thông tin đăng nhập sai");
   };

@@ -11,6 +11,7 @@ import {
   Pressable,
   ScrollView,
   IconButton,
+  useToast,
 } from "native-base";
 import { ImageBackground } from "react-native";
 import { BlurView } from "expo-blur";
@@ -32,6 +33,7 @@ const BookingScreen = () => {
   const [selected, setSelected] = useState(1);
   const [location, setLocation] = useState("");
   const [desination, setDesination] = useState("");
+  const toast = useToast();
   const data_trip = [
     { id: 1, name: "Round Trip", icon: "circle", iconType: Entypo },
     { id: 2, name: "Multi City", icon: "recycle", iconType: FontAwesome5 },
@@ -238,9 +240,20 @@ const BookingScreen = () => {
                                   x.desination == desination
                               )
                             );
-                            setL(location);
-                            setD(desination);
-                            nav.navigate("SelectYourFlightScreen");
+
+                            if (
+                              data.filter(
+                                (x) =>
+                                  x.location == location &&
+                                  x.desination == desination
+                              ).length == 0
+                            ) {
+                              toast.show({ description: "Not Found" });
+                            } else {
+                              setL(location);
+                              setD(desination);
+                              nav.navigate("SelectYourFlightScreen");
+                            }
                           });
                       }}
                     >

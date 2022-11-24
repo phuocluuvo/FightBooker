@@ -70,7 +70,7 @@ const Onboard = ({ navigation }) => {
         renderItem={({ item, index }) => {
           return (
             <View className="bg-black" key={index}>
-              <View className=" h-[50%] w-[100%] items-center">
+              <View className=" h-[45%] w-[100%] items-center">
                 <Image
                   source={{ uri: item.img }}
                   className="rounded-3xl"
@@ -91,7 +91,7 @@ const Onboard = ({ navigation }) => {
                   onPress={() => {
                     navigation.navigate("SignInScreen");
                   }}
-                  className="absolute bottom-80 mx-2 items-center justify-center rounded-2xl w-[350px] h-[50px] bg-blue-600"
+                  className=" mx-2 items-center justify-center rounded-2xl w-[350px] h-[50px] bg-blue-600"
                 >
                   <Text style={styles.body}>{item.textbutton}</Text>
                 </TouchableOpacity>
