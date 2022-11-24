@@ -29,7 +29,7 @@ export default function SignInScreen() {
     if (data.some((u) => u.email == email && u.password == password)) {
       nav.navigate("HomePageRoute");
       seterr("");
-    } else seterr("Thông tin đăng nhập sai");
+    } else seterr("Thông tin đăng nhập bị sai");
   };
   return (
     <SafeAreaView
