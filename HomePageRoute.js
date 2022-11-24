@@ -33,7 +33,7 @@ export default function HomePageRoute() {
     >
       <Tab.Screen
         options={{
-          tabBarLabel: "Messages",
+          tabBarLabel: "Flights",
 
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="plane" size={20} color={color} />
@@ -45,7 +45,7 @@ export default function HomePageRoute() {
 
       <Tab.Screen
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "Notification",
           tabBarIcon: ({ color }) => (
             <Ionicons name="notifications" size={24} color={color} />
           ),
@@ -55,7 +55,7 @@ export default function HomePageRoute() {
       />
       <Tab.Screen
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
             <FontAwesome name="search" size={24} color={color} />
           ),
@@ -65,7 +65,7 @@ export default function HomePageRoute() {
       />
       <Tab.Screen
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "User",
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="user-alt" size={24} color={color} />
           ),

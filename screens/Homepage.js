@@ -6,7 +6,7 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Avatar,
@@ -23,27 +23,35 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-const data = [
-  {
-    city: "Paris",
-    country: "France",
-    price: 450,
-    img: "https://images.pexels.com/photos/1125212/pexels-photo-1125212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  },
-  {
-    city: "Bali",
-    country: "Indonesia",
-    price: 375,
-    img: "https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  },
-  {
-    city: "Moscow",
-    country: "Russia",
-    price: 365,
-    img: "https://images.pexels.com/photos/92412/pexels-photo-92412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  },
-];
+import axios from "axios";
+// const data = [
+//   {
+//     city: "Paris",
+//     country: "France",
+//     price: 450,
+//     img: "https://images.pexels.com/photos/1125212/pexels-photo-1125212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+//   },
+//   {
+//     city: "Bali",
+//     country: "Indonesia",
+//     price: 375,
+//     img: "https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+//   },
+//   {
+//     city: "Moscow",
+//     country: "Russia",
+//     price: 365,
+//     img: "https://images.pexels.com/photos/92412/pexels-photo-92412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+//   },
+// ];
 const Homepage = () => {
+  const [data,setData]=useState()
+  useEffect(() => {
+    axios
+      .get("https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataHome")
+      .then((data) => setData(data.data));
+
+  }, []);
   return (
     <ScrollView>
       <Box
