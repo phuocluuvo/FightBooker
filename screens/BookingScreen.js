@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Text,
@@ -25,11 +25,13 @@ import Animated, {
 import { Entypo, Feather, FontAwesome5 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { DataContext } from "../provider/Provider";
 const BookingScreen = () => {
   const nav = useNavigation();
-
+  const { data, setData, setL, setD } = useContext(DataContext);
   const [selected, setSelected] = useState(1);
-
+  const [location, setLocation] = useState("");
+  const [desination, setDesination] = useState("");
   const data_trip = [
     { id: 1, name: "Round Trip", icon: "circle", iconType: Entypo },
     { id: 2, name: "Multi City", icon: "recycle", iconType: FontAwesome5 },
@@ -172,13 +174,25 @@ const BookingScreen = () => {
                     <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
                       Location:
                     </Text>
-                    <Input w="full" bg="white:alpha.10" rounded="full"></Input>
+                    <Input
+                      w="full"
+                      value={location}
+                      onChangeText={setLocation}
+                      bg="white:alpha.10"
+                      rounded="full"
+                    ></Input>
                   </VStack>
                   <VStack>
                     <Text color={"black"} fontSize="xl" fontWeight={"bold"}>
                       Desination:
                     </Text>
-                    <Input bg="white:alpha.10" w="full" rounded="full"></Input>
+                    <Input
+                      bg="white:alpha.10"
+                      value={desination}
+                      onChangeText={setDesination}
+                      w="full"
+                      rounded="full"
+                    ></Input>
                   </VStack>
                   <HStack space={3}>
                     <VStack flex="1">
@@ -211,7 +225,24 @@ const BookingScreen = () => {
                   </VStack>
                   <Box w="full" flexDir={"row"} my="2" justifyContent="center">
                     <Pressable
-                      onPress={() => nav.navigate("SelectYourFlightScreen")}
+                      onPress={() => {
+                        fetch(
+                          "https://633f93fb0dbc3309f3cce759.mockapi.io/api/flight"
+                        )
+                          .then((data) => data.json())
+                          .then((data) => {
+                            setData(
+                              data.filter(
+                                (x) =>
+                                  x.location == location &&
+                                  x.desination == desination
+                              )
+                            );
+                            setL(location);
+                            setD(desination);
+                            nav.navigate("SelectYourFlightScreen");
+                          });
+                      }}
                     >
                       <Box
                         px="4"

@@ -1,5 +1,5 @@
 import { View, Image, ImageBackground, Animated } from "react-native";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import {
   Box,
   Text,
@@ -15,99 +15,12 @@ import MaskedView from "@react-native-community/masked-view";
 import { Easing } from "react-native-reanimated";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-
-const Boarding = () => (
-  <ImageBackground
-    source={require("../assets/Base2.png")}
-    resizeMode="cover"
-    alignItems="center"
-  >
-    <Box alignItems="center" justifyContent="center" mt={2}>
-      <Box w={250}>
-        <HStack mt={2} justifyContent="space-between" alignItems="flex-end">
-          <VStack alignItems="center">
-            <Image source={require("../assets/ca.png")}></Image>
-            <Text className="">Air Canada</Text>
-          </VStack>
-          <Box>Decenber 16th, 2022</Box>
-        </HStack>
-
-        <HStack justifyContent="space-between" mt={5}>
-          <VStack>
-            <Text style={{ fontFamily: "Inter_900Black" }}>07h05</Text>
-            <Text
-              style={{ fontFamily: "Inter_900Black" }}
-              className=" text-gray-500"
-            >
-              YUL
-            </Text>
-          </VStack>
-
-          <VStack alignItems="center">
-            <Image source={require("../assets/maybay.png")}></Image>
-            <Text>13h00</Text>
-          </VStack>
-
-          <VStack alignItems="flex-end">
-            <Text style={{ fontFamily: "Inter_900Black" }}>20h05</Text>
-            <Text
-              style={{ fontFamily: "Inter_900Black" }}
-              className=" text-gray-500"
-            >
-              NRT
-            </Text>
-          </VStack>
-        </HStack>
-        <Image
-          className="ml-[-18] mt-4 mb-4"
-          source={require("../assets/2a.png")}
-        ></Image>
-
-        <HStack justifyContent="space-between">
-          <VStack alignItems="center">
-            <Text>Economy</Text>
-            <Text style={{ fontFamily: "Inter_900Black" }}>Class</Text>
-          </VStack>
-          <VStack alignItems="center">
-            <Text>8</Text>
-            <Text style={{ fontFamily: "Inter_900Black" }}>Gate</Text>
-          </VStack>
-          <VStack alignItems="center">
-            <Text>3</Text>
-            <Text style={{ fontFamily: "Inter_900Black" }}>Terminal</Text>
-          </VStack>
-          <VStack alignItems="center">
-            <Text>AC006</Text>
-            <Text style={{ fontFamily: "Inter_900Black" }}>Flight</Text>
-          </VStack>
-        </HStack>
-        <Image
-          className="ml-[-18] mt-3 mb-3"
-          source={require("../assets/2a.png")}
-        ></Image>
-        <HStack justifyContent="space-between" alignItems="center">
-          <HStack alignItems="center">
-            <Avatar source={require("../assets/ava.png")}></Avatar>
-            <VStack>
-              <Text>Cathrina Dion</Text>
-              <Text>24 years, Female</Text>
-            </VStack>
-          </HStack>
-          <HStack alignItems="center">
-            <Image source={require("../assets/Sofa.png")}></Image>
-            <Text>29A</Text>
-          </HStack>
-        </HStack>
-
-        <Image source={require("../assets/2.png")} className="mt-3"></Image>
-      </Box>
-
-      <Image source={require("../assets/Scan.png")} className="mt-4"></Image>
-    </Box>
-  </ImageBackground>
-);
+import { DataContext } from "../provider/Provider";
 
 export default function BoardingPass() {
+  const { bp } = useContext(DataContext);
+  console.log(bp);
+
   const nav = useNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -217,25 +130,25 @@ export default function BoardingPass() {
                     >
                       <VStack alignItems="center">
                         <Image source={require("../assets/ca.png")}></Image>
-                        <Text className="">Air Canada</Text>
+                        <Text className="">{bp.flight}</Text>
                       </VStack>
                       <Box>Decenber 16th, 2022</Box>
                     </HStack>
 
                     <HStack justifyContent="space-between" mt={5}>
                       <VStack>
-                        <Text className="">07h05</Text>
-                        <Text className=" text-gray-500">YUL</Text>
+                        <Text className="">{bp.timeIn}</Text>
+                        <Text className=" text-gray-500">{bp.location}</Text>
                       </VStack>
 
                       <VStack alignItems="center">
                         <Image source={require("../assets/maybay.png")}></Image>
-                        <Text>13h00</Text>
+                        <Text>{bp.time}</Text>
                       </VStack>
 
                       <VStack alignItems="flex-end">
-                        <Text className="">20h05</Text>
-                        <Text className=" text-gray-500">NRT</Text>
+                        <Text className="">{bp.timeOut}</Text>
+                        <Text className=" text-gray-500">{bp.desination}</Text>
                       </VStack>
                     </HStack>
                     <Image

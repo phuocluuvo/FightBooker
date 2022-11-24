@@ -40,7 +40,7 @@ export default function Ticket({ item, handler }) {
               color: "#000",
             }}
           >
-            {item.timeStart}
+            {item.timeIn}
           </Text>
           <Text
             style={{
@@ -49,7 +49,7 @@ export default function Ticket({ item, handler }) {
               color: "rgba(0, 0, 0, 0.6)",
             }}
           >
-            {item.start}
+            {item.location}
           </Text>
         </View>
         <View
@@ -64,7 +64,7 @@ export default function Ticket({ item, handler }) {
               color: "#000",
             }}
           >
-            {item.timing}
+            {item.time}
           </Text>
         </View>
         <View
@@ -79,7 +79,7 @@ export default function Ticket({ item, handler }) {
               color: "#000",
             }}
           >
-            {item.timeEnd}
+            {item.timeOut}
           </Text>
           <Text
             style={{
@@ -88,7 +88,7 @@ export default function Ticket({ item, handler }) {
               color: "rgba(0, 0, 0, 0.6)",
             }}
           >
-            {item.end}
+            {item.desination}
           </Text>
         </View>
       </View>
@@ -106,7 +106,7 @@ export default function Ticket({ item, handler }) {
             color: "#000",
           }}
         >
-          {item.nameAir}
+          {item.flight}
         </Text>
         <Text
           style={{

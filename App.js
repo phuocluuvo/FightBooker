@@ -19,6 +19,7 @@ import Homepage from "./screens/Homepage";
 import SelectYourFlightScreen from "./screens/SelectYourFlightScreen";
 import HomePageRoute from "./HomePageRoute";
 import BoardingPass from "./screens/BoardingPass";
+import { SPProvider } from "./provider/Provider";
 const Stack = createNativeStackNavigator();
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -34,29 +35,31 @@ export default function App() {
     },
   };
   return (
-    <NavigationContainer>
-      <NativeBaseProvider config={config}>
-        <Stack.Navigator
-          initialRouteName="Onboard"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen component={BookingScreen} name="BookingScreen" />
-          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-          <Stack.Screen
-            name="EditProfileScreen"
-            component={EditProfileScreen}
-          />
-          <Stack.Screen name="Onboard" component={Onboard} />
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-          <Stack.Screen name="SignInScreen" component={SignInScreen} />
-          <Stack.Screen name="HomePageRoute" component={HomePageRoute} />
-          <Stack.Screen name="BoardingPass" component={BoardingPass} />
-          <Stack.Screen
-            name="SelectYourFlightScreen"
-            component={SelectYourFlightScreen}
-          />
-        </Stack.Navigator>
-      </NativeBaseProvider>
-    </NavigationContainer>
+    <SPProvider>
+      <NavigationContainer>
+        <NativeBaseProvider config={config}>
+          <Stack.Navigator
+            initialRouteName="Onboard"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen component={BookingScreen} name="BookingScreen" />
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+            <Stack.Screen
+              name="EditProfileScreen"
+              component={EditProfileScreen}
+            />
+            <Stack.Screen name="Onboard" component={Onboard} />
+            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+            <Stack.Screen name="SignInScreen" component={SignInScreen} />
+            <Stack.Screen name="HomePageRoute" component={HomePageRoute} />
+            <Stack.Screen name="BoardingPass" component={BoardingPass} />
+            <Stack.Screen
+              name="SelectYourFlightScreen"
+              component={SelectYourFlightScreen}
+            />
+          </Stack.Navigator>
+        </NativeBaseProvider>
+      </NavigationContainer>
+    </SPProvider>
   );
 }

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -18,6 +18,8 @@ import Ticket from "../components/Ticket";
 import { Box, Text } from "native-base";
 import axios from "axios";
 import { BlurView } from "expo-blur";
+import { DataContext } from "../provider/Provider";
+
 // const DATA = [
 //   {
 //     timeStart: "7:05 AM",
@@ -57,13 +59,14 @@ import { BlurView } from "expo-blur";
 //   },
 // ];
 export default function SelectYourFlightScreen() {
-  const [DATA, setDATA] = useState();
+  // const [DATA, setDATA] = useState();
+  const { data, l, d, setBp, bp } = useContext(DataContext);
   useEffect(() => {
-    axios
-      .get(
-        "https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataSelectYourFlightScreen"
-      )
-      .then((data) => setDATA(data.data));
+    // axios
+    //   .get(
+    //     "https://637f0143cfdbfd9a63bb6e29.mockapi.io/FightBooker/dataSelectYourFlightScreen"
+    //   )
+    //   .then((data) => setDATA(data.data));
   }, []);
   const fAnim = useRef(new Animated.Value(65)).current;
   const Move = () => {
@@ -169,7 +172,7 @@ export default function SelectYourFlightScreen() {
               fontFamily: "Inter_900Black",
             }}
           >
-            YUL
+            {l}
           </Text>
         </View>
         <View
@@ -190,7 +193,7 @@ export default function SelectYourFlightScreen() {
               fontFamily: "Inter_900Black",
             }}
           >
-            NRT
+            {d}
           </Text>
         </View>
       </View>
@@ -291,9 +294,15 @@ export default function SelectYourFlightScreen() {
           style={{
             marginTop: 20,
           }}
-          data={DATA}
+          data={data}
           renderItem={({ item }) => (
-            <Ticket item={item} handler={() => nav.navigate("BoardingPass")} />
+            <Ticket
+              item={item}
+              handler={() => {
+                setBp(item);
+                nav.navigate("BoardingPass");
+              }}
+            />
           )}
         />
       </BlurView>
